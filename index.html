@@ -417,9 +417,7 @@
     <p>Every memory from the voyage, sorted by where we were.</p>
   </div>
 
-  <div class="gallery-tip">
-    <strong>The easy way to do this:</strong> Upload everything (your Pixel shots, iPhone photos, and the thumb drive from the ship) into one Google Photos shared album. Google Photos reads the GPS data from your Pixel and iPhone automatically and groups photos by place. You can link to that one album from here, or create a separate album per port. Either works great and your friends and family just click and see everything.
-  </div>
+  
 
   <div class="port-gallery-group">
     <div class="port-gallery-title">
@@ -684,6 +682,8 @@ function openPort(id) {
   hl.innerHTML = p.highlights.map(h => `<span class="highlight-tag${p.rose ? ' rose' : ''}">${h}</span>`).join('');
   const pb = document.getElementById('card-photos-btn');
   pb.href = p.photosLink || '#';
+  pb.target = '_blank';
+  pb.rel = 'noopener noreferrer';
   pb.className = 'btn-photos' + (p.rose ? ' rose' : '');
   document.getElementById('card-tip').textContent = '';
   document.querySelectorAll('.port-marker,.proposal-marker').forEach(m => m.classList.remove('active'));
