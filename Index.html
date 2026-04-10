@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our European Adventure, Carnival Glory 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Cinzel:wght@400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a0f1e;
+    --deep: #060b17;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f4ede0;
+    --rose: #e8a0a0;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--deep); color:var(--cream); font-family:'Cormorant Garamond',serif; overflow-x:hidden; cursor:crosshair; }
+
+  .stars {
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%,rgba(255,255,255,0.3) 0%,transparent 100%),
+      radial-gradient(1px 1px at 25% 40%,rgba(255,255,255,0.2) 0%,transparent 100%),
+      radial-gradient(1px 1px at 50% 8%,rgba(255,255,255,0.25) 0%,transparent 100%),
+      radial-gradient(1px 1px at 75% 22%,rgba(255,255,255,0.2) 0%,transparent 100%),
+      radial-gradient(1px 1px at 90% 60%,rgba(255,255,255,0.15) 0%,transparent 100%),
+      radial-gradient(2px 2px at 5% 85%,rgba(201,168,76,0.3) 0%,transparent 100%),
+      radial-gradient(2px 2px at 80% 10%,rgba(201,168,76,0.2) 0%,transparent 100%);
+  }
+
+  /* INTRO */
+  #intro { position:fixed; inset:0; z-index:1000; background:var(--deep); display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 1.2s ease,visibility 1.2s ease; }
+  #intro.gone { opacity:0; visibility:hidden; pointer-events:none; }
+  .intro-ship { font-size:5rem; margin-bottom:1.5rem; animation:bob 3s ease-in-out infinite; filter:drop-shadow(0 0 30px rgba(201,168,76,0.5)); }
+  @keyframes bob { 0%,100%{transform:translateY(0) rotate(-3deg)} 50%{transform:translateY(-12px) rotate(3deg)} }
+  .intro-title { font-family:'Cinzel',serif; font-size:clamp(1.8rem,5vw,3.5rem); color:var(--gold); letter-spacing:0.2em; text-align:center; margin-bottom:0.5rem; animation:fadeUp 1s ease 0.3s both; }
+  .intro-sub { font-size:1.2rem; font-style:italic; color:rgba(244,237,224,0.6); letter-spacing:0.1em; animation:fadeUp 1s ease 0.6s both; text-align:center; }
+  .intro-ring { font-size:2rem; margin-top:0.8rem; animation:fadeUp 1s ease 0.8s both,ring-pulse 2s ease-in-out 1.5s infinite; }
+  @keyframes ring-pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+  .intro-line { width:200px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:2rem auto; animation:fadeUp 1s ease 0.9s both; }
+  .enter-btn { font-family:'Cinzel',serif; font-size:0.9rem; letter-spacing:0.3em; color:var(--navy); background:var(--gold); border:none; padding:1rem 2.5rem; cursor:pointer; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:all 0.3s ease; animation:fadeUp 1s ease 1.2s both; }
+  .enter-btn:hover { background:var(--gold-light); transform:scale(1.05); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  /* HEADER */
+  header { position:relative; z-index:10; padding:4rem 2rem 2rem; text-align:center; border-bottom:1px solid rgba(201,168,76,0.2); }
+  .voyage-label { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.4em; color:var(--gold); margin-bottom:1rem; }
+  h1 { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,6vw,4.5rem); font-weight:400; line-height:1.1; margin-bottom:0.5rem; }
+  h1 em { font-style:italic; color:var(--gold-light); }
+  .header-meta { font-size:1rem; font-style:italic; color:rgba(244,237,224,0.5); letter-spacing:0.15em; margin-top:0.5rem; }
+  .gold-rule { width:100%; max-width:500px; height:1px; margin:1.5rem auto 0; background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold-light) 50%,var(--gold) 70%,transparent); }
+
+  /* NAV */
+  .nav-tabs { position:sticky; top:0; z-index:100; display:flex; justify-content:center; background:rgba(6,11,23,0.95); backdrop-filter:blur(10px); border-bottom:1px solid rgba(201,168,76,0.2); padding:0 1rem; }
+  .nav-tab { font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.25em; color:rgba(244,237,224,0.5); background:none; border:none; padding:1.2rem 2rem; cursor:pointer; border-bottom:2px solid transparent; transition:all 0.3s ease; white-space:nowrap; }
+  .nav-tab:hover { color:var(--gold-light); }
+  .nav-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+
+  .section { display:none; }
+  .section.active { display:block; }
+
+  /* MAP */
+  #map-section { position:relative; min-height:100vh; }
+  .map-intro { text-align:center; padding:3rem 2rem 2rem; }
+  .map-intro p { font-size:1.1rem; font-style:italic; color:rgba(244,237,224,0.6); max-width:500px; margin:0 auto; }
+  .pulse-hint { display:inline-flex; align-items:center; gap:0.5rem; font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); margin-top:1rem; animation:pulse-fade 2s ease-in-out infinite; }
+  @keyframes pulse-fade { 0%,100%{opacity:0.4} 50%{opacity:1} }
+  .map-container { position:relative; max-width:1400px; margin:0 auto; padding:0.5rem 1.5rem 3rem; }
+  #cruise-map { width:100%; height:auto; display:block; filter:drop-shadow(0 20px 60px rgba(0,0,0,0.6)); transition:transform 0.3s ease; transform-origin:center top; }
+  .zoom-controls { display:flex; justify-content:center; gap:0.8rem; margin:0 0 1rem; }
+  .zoom-btn { font-family:'Cinzel',serif; font-size:0.8rem; letter-spacing:0.2em; color:var(--gold); background:rgba(201,168,76,0.07); border:1px solid rgba(201,168,76,0.3); padding:0.6rem 1.6rem; cursor:pointer; transition:all 0.2s ease; }
+  .zoom-btn:hover { background:rgba(201,168,76,0.18); border-color:var(--gold); }
+  .zoom-btn.active-zoom { background:rgba(201,168,76,0.2); border-color:var(--gold); color:var(--gold-light); }
+
+  .route-path { fill:none; stroke:var(--gold); stroke-width:1.5; stroke-dasharray:6 5; stroke-linecap:round; opacity:0.7; animation:dash-flow 30s linear infinite; }
+  @keyframes dash-flow { to{stroke-dashoffset:-220} }
+
+  #ship-icon { animation:ship-float 4s ease-in-out infinite; }
+  @keyframes ship-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+
+  .port-marker { cursor:pointer; }
+  .port-pulse { fill:none; stroke:var(--gold); stroke-width:1; opacity:0; }
+  .port-marker:hover .port-pulse,.port-marker.active .port-pulse { animation:pulse-ring 1.5s ease-out infinite; }
+  @keyframes pulse-ring { 0%{opacity:0.8;r:10} 100%{opacity:0;r:26} }
+  .port-circle { fill:var(--gold); stroke:var(--cream); stroke-width:1.5; transition:all 0.3s ease; }
+  .port-marker.active .port-circle { fill:var(--gold-light); }
+  .port-label { font-family:'Cinzel',serif; font-size:9.5px; fill:var(--cream); text-anchor:middle; pointer-events:none; }
+  .camera-icon { font-size:11px; fill:var(--gold); text-anchor:middle; pointer-events:none; animation:cam-pulse 2s ease-in-out infinite; }
+  @keyframes cam-pulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
+  .click-badge { font-family:'Space Mono',monospace; font-size:6.5px; fill:var(--gold); text-anchor:middle; pointer-events:none; }
+  .land { fill:#1a2a3a; stroke:#2a3f52; stroke-width:0.5; }
+
+  /* PROPOSAL */
+  .proposal-marker { cursor:pointer; }
+  .proposal-ring-pulse { fill:none; stroke:var(--rose); stroke-width:1; opacity:0; }
+  .proposal-marker:hover .proposal-ring-pulse,.proposal-marker.active .proposal-ring-pulse { animation:prop-pulse 1.8s ease-out infinite; }
+  @keyframes prop-pulse { 0%{opacity:1;r:10} 100%{opacity:0;r:28} }
+  .proposal-circle { fill:var(--rose); stroke:white; stroke-width:1.5; filter:drop-shadow(0 0 8px rgba(232,160,160,0.9)); }
+  .proposal-label { font-family:'Cinzel',serif; font-size:8.5px; fill:var(--rose); text-anchor:middle; pointer-events:none; font-weight:600; }
+  .proposal-sublabel { font-family:'Cormorant Garamond',serif; font-size:7px; fill:rgba(232,160,160,0.75); text-anchor:middle; pointer-events:none; font-style:italic; }
+
+  /* CARD */
+  #port-card { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.9); z-index:500; width:min(560px,92vw); background:linear-gradient(145deg,#0d1f2e,#071420); border:1px solid rgba(201,168,76,0.4); box-shadow:0 30px 80px rgba(0,0,0,0.8),inset 0 1px 0 rgba(201,168,76,0.2); opacity:0; pointer-events:none; transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1); overflow:hidden; }
+  #port-card.open { opacity:1; pointer-events:all; transform:translate(-50%,-50%) scale(1); }
+  #port-card.proposal-card { border-color:rgba(232,160,160,0.5); }
+  .card-header { padding:2rem 2rem 1.2rem; border-bottom:1px solid rgba(201,168,76,0.15); position:relative; }
+  #port-card.proposal-card .card-header { border-bottom-color:rgba(232,160,160,0.2); }
+  .card-port-num { font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.3em; color:var(--gold); margin-bottom:0.4rem; }
+  .card-port-num.rose { color:var(--rose); }
+  .card-title { font-family:'Playfair Display',serif; font-size:2rem; font-weight:400; }
+  .card-title em { font-style:italic; color:var(--gold-light); }
+  .card-date { font-style:italic; color:rgba(244,237,224,0.5); font-size:0.95rem; margin-top:0.3rem; }
+  .card-flag { font-size:1.8rem; position:absolute; right:2rem; top:2rem; }
+  .close-btn { position:absolute; right:1rem; top:1rem; background:none; border:none; color:rgba(244,237,224,0.4); font-size:1.2rem; cursor:pointer; width:30px; height:30px; display:flex; align-items:center; justify-content:center; transition:color 0.2s; font-family:monospace; }
+  .close-btn:hover { color:var(--cream); }
+  .card-body { padding:1.5rem 2rem; }
+  .card-desc { font-size:1rem; line-height:1.75; color:rgba(244,237,224,0.8); margin-bottom:1rem; }
+  .card-coords { font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.12em; color:rgba(232,160,160,0.6); margin-bottom:1.2rem; }
+  .card-highlights { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.8rem; }
+  .highlight-tag { font-family:'Space Mono',monospace; font-size:0.55rem; letter-spacing:0.15em; color:var(--navy); background:var(--gold); padding:0.3rem 0.8rem; clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%); }
+  .highlight-tag.rose { background:var(--rose); }
+  .card-actions { display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn-photos,.btn-videos { flex:1; min-width:120px; font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.2em; padding:0.9rem 1rem; border:none; cursor:pointer; transition:all 0.3s ease; text-decoration:none; text-align:center; display:flex; align-items:center; justify-content:center; gap:0.5rem; }
+  .btn-photos { background:var(--gold); color:var(--navy); clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%); }
+  .btn-photos:hover { background:var(--gold-light); transform:translateY(-2px); }
+  .btn-photos.rose { background:var(--rose); }
+  .btn-photos.rose:hover { background:#f0b8b8; }
+  .btn-videos { background:transparent; color:var(--gold); border:1px solid rgba(201,168,76,0.5); }
+  .btn-videos:hover { border-color:var(--gold); background:rgba(201,168,76,0.08); }
+  .btn-videos.rose { color:var(--rose); border-color:rgba(232,160,160,0.4); }
+  .card-tip { margin-top:1.2rem; font-size:0.8rem; color:rgba(244,237,224,0.3); font-style:italic; text-align:center; }
+
+  #backdrop { position:fixed; inset:0; z-index:499; background:rgba(0,0,0,0.7); opacity:0; pointer-events:none; transition:opacity 0.4s ease; backdrop-filter:blur(3px); }
+  #backdrop.open { opacity:1; pointer-events:all; }
+
+  /* GALLERY */
+  #gallery-section { padding:3rem 2rem 5rem; max-width:900px; margin:0 auto; }
+  .gallery-header { text-align:center; margin-bottom:2rem; }
+  .gallery-header h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,3rem); font-weight:400; margin-bottom:0.5rem; }
+  .gallery-header p { font-style:italic; color:rgba(244,237,224,0.5); font-size:1rem; }
+  .gallery-tip { background:rgba(201,168,76,0.05); border-left:3px solid var(--gold); padding:1.2rem 1.5rem; margin-bottom:3rem; font-size:0.95rem; line-height:1.75; color:rgba(244,237,224,0.7); }
+  .gallery-tip strong { color:var(--gold-light); }
+  .port-gallery-group { margin-bottom:3.5rem; }
+  .port-gallery-title { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; padding-bottom:0.8rem; border-bottom:1px solid rgba(201,168,76,0.2); }
+  .port-gallery-title .flag-em { font-size:1.8rem; }
+  .port-gallery-title h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:400; }
+  .port-gallery-title .date-tag { font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:var(--gold); margin-left:auto; }
+  .port-gallery-title .date-tag.rose { color:var(--rose); }
+  .add-photos-zone { border:1px dashed rgba(201,168,76,0.3); border-radius:4px; padding:2rem; text-align:center; color:rgba(244,237,224,0.4); font-style:italic; font-size:0.95rem; background:rgba(201,168,76,0.02); }
+  .add-photos-zone::before { content:'📸'; display:block; font-size:1.8rem; margin-bottom:0.6rem; opacity:0.5; }
+  .add-photos-zone.rose { border-color:rgba(232,160,160,0.3); background:rgba(232,160,160,0.02); }
+  .add-photos-zone.rose::before { content:'💍'; }
+  .add-photos-zone a { color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(201,168,76,0.3); }
+
+  /* ABOUT */
+  #about-section { max-width:750px; margin:0 auto; padding:4rem 2rem 6rem; text-align:center; }
+  #about-section h2 { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:400; margin-bottom:2rem; }
+  .voyage-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1.5rem; margin:2.5rem 0; }
+  .stat-box { border:1px solid rgba(201,168,76,0.2); padding:1.5rem 1rem; background:rgba(201,168,76,0.03); position:relative; }
+  .stat-box::before { content:''; position:absolute; top:-1px; left:15%; right:15%; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+  .stat-num { font-family:'Cinzel',serif; font-size:2rem; color:var(--gold); display:block; }
+  .stat-label { font-family:'Space Mono',monospace; font-size:0.55rem; letter-spacing:0.2em; color:rgba(244,237,224,0.4); display:block; margin-top:0.3rem; }
+  #about-section p { font-size:1.05rem; line-height:1.8; color:rgba(244,237,224,0.65); margin-bottom:1rem; }
+  .setup-box { background:rgba(201,168,76,0.05); border:1px solid rgba(201,168,76,0.2); padding:2rem; margin:2rem 0; text-align:left; }
+  .setup-box h3 { font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:1.2rem; }
+  .setup-box ol { padding-left:1.2rem; font-size:0.92rem; line-height:2.2; color:rgba(244,237,224,0.7); }
+  .setup-box code { font-family:'Space Mono',monospace; font-size:0.72rem; background:rgba(201,168,76,0.1); padding:0.1rem 0.4rem; border-radius:2px; color:var(--gold-light); }
+
+  footer { text-align:center; padding:2rem; border-top:1px solid rgba(201,168,76,0.1); font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(244,237,224,0.2); }
+  .ocean-anim { text-align:center; font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.3em; color:rgba(100,180,220,0.3); padding:1rem; animation:wave-color 4s ease-in-out infinite; }
+  @keyframes wave-color { 0%,100%{color:rgba(100,180,220,0.2)} 50%{color:rgba(100,180,220,0.5)} }
+
+  @media(max-width:600px) {
+    .nav-tab { padding:1rem 0.8rem; font-size:0.6rem; letter-spacing:0.1em; }
+    .card-actions { flex-direction:column; }
+    #gallery-section { padding:2rem 1rem 4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="stars"></div>
+
+<div id="intro">
+  <div class="intro-ship">⚓</div>
+  <div class="intro-title">CARNIVAL GLORY</div>
+  <div class="intro-sub">Mediterranean &amp; Canary Islands · 2026</div>
+  <div class="intro-ring">💍</div>
+  <div class="intro-line"></div>
+  <button class="enter-btn" onclick="enterSite()">BEGIN THE VOYAGE ›</button>
+</div>
+
+<header>
+  <div class="voyage-label">★ &nbsp; Mediterranean Sea Voyage &nbsp; ★</div>
+  <h1>Our <em>European</em> Adventure</h1>
+  <div class="header-meta">Carnival Glory &nbsp;·&nbsp; March 25 – April 9, 2026 &nbsp;·&nbsp; 15 Nights</div>
+  <div class="gold-rule"></div>
+</header>
+
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showSection('map',this)">🗺 VOYAGE MAP</button>
+  <button class="nav-tab" onclick="showSection('gallery',this)">📸 ALL PHOTOS &amp; VIDEOS</button>
+  <button class="nav-tab" onclick="showSection('about',this)">⚓ ABOUT THIS VOYAGE</button>
+</nav>
+
+<div id="map-section" class="section active">
+  <div class="map-intro">
+    <p>Click any glowing port to explore our photos from that stop. The 💍 marks something very special that happened at sea.</p>
+    <div class="pulse-hint">▸ &nbsp; CLICK THE GLOWING PORTS TO EXPLORE &nbsp; ◂</div>
+  </div>
+
+  <div class="zoom-controls">
+    <button class="zoom-btn" onclick="setZoom(1)">NORMAL SIZE</button>
+    <button class="zoom-btn" onclick="setZoom(1.4)">LARGER ＋</button>
+    <button class="zoom-btn" onclick="setZoom(1.85)">BIGGEST ＋＋</button>
+  </div>
+
+  <div class="map-container">
+    <svg id="cruise-map" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="rose-glow"><feGaussianBlur stdDeviation="5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <radialGradient id="ocean-grad" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#0d2137"/><stop offset="100%" stop-color="#060b17"/></radialGradient>
+        <radialGradient id="proposal-halo" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(232,160,160,0.35)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      </defs>
+
+      <rect width="960" height="600" fill="url(#ocean-grad)"/>
+      <g opacity="0.04" stroke="#a0c4d8" stroke-width="0.5">
+        <line x1="0" y1="150" x2="960" y2="150"/><line x1="0" y1="300" x2="960" y2="300"/><line x1="0" y1="450" x2="960" y2="450"/>
+        <line x1="240" y1="0" x2="240" y2="600"/><line x1="480" y1="0" x2="480" y2="600"/><line x1="720" y1="0" x2="720" y2="600"/>
+      </g>
+
+      <!-- Iberian Peninsula -->
+      <path class="land" d="M 155,48 L 230,43 L 278,58 L 293,88 L 308,118 L 303,158 L 278,183 L 255,204 L 220,218 L 188,223 L 162,202 L 138,176 L 128,145 L 131,110 L 145,72 Z"/>
+      <path d="M 272,198 L 288,208 L 283,218 L 268,208 Z" fill="#253d50"/>
+      <!-- Southern France -->
+      <path class="land" d="M 355,48 L 428,43 L 468,58 L 488,72 L 478,93 L 458,98 L 428,88 L 385,82 L 355,72 Z"/>
+      <!-- Italy -->
+      <path class="land" d="M 478,48 L 530,46 L 560,63 L 570,95 L 560,132 L 540,162 L 530,193 L 540,222 L 535,248 L 515,263 L 500,253 L 505,228 L 498,202 L 490,177 L 485,147 L 495,122 L 500,97 L 490,72 L 468,58 Z"/>
+      <!-- Sicily -->
+      <path class="land" d="M 488,273 L 523,268 L 538,281 L 526,295 L 498,293 L 483,283 Z"/>
+      <!-- Sardinia -->
+      <path class="land" d="M 418,188 L 433,181 L 443,198 L 436,218 L 420,221 L 410,203 Z"/>
+      <!-- Corsica -->
+      <path class="land" d="M 438,128 L 450,121 L 458,138 L 452,158 L 438,161 L 430,143 Z"/>
+      <!-- North Africa -->
+      <path class="land" d="M 60,318 L 960,318 L 960,425 L 60,425 Z" opacity="0.55"/>
+      <path class="land" d="M 60,318 L 200,302 L 268,312 L 288,322 L 272,337 L 200,347 L 95,357 L 60,345 Z"/>
+      <!-- Canary Islands, fully visible, spaced out -->
+      <ellipse class="land" cx="115" cy="490" rx="18" ry="12"/>
+      <ellipse class="land" cx="168" cy="482" rx="17" ry="13"/>
+      <ellipse class="land" cx="220" cy="488" rx="11" ry="16"/>
+      <ellipse class="land" cx="252" cy="470" rx="9" ry="7"/>
+      <!-- Balearics -->
+      <ellipse class="land" cx="358" cy="148" rx="19" ry="9" opacity="0.8"/>
+      <ellipse class="land" cx="390" cy="140" rx="9" ry="5" opacity="0.8"/>
+      <ellipse class="land" cx="332" cy="158" rx="8" ry="5" opacity="0.8"/>
+      <!-- Greece -->
+      <path class="land" d="M 668,102 L 710,92 L 730,112 L 725,143 L 710,158 L 688,153 L 673,133 Z"/>
+      <!-- Turkey -->
+      <path class="land" d="M 750,77 L 860,72 L 920,93 L 940,118 L 910,128 L 858,123 L 800,113 L 758,102 Z"/>
+      <!-- Croatia -->
+      <path class="land" d="M 558,77 L 610,72 L 640,88 L 635,113 L 615,118 L 583,108 L 563,92 Z"/>
+
+      <!-- ROUTE: Barcelona → Málaga → Tangier → Civitavecchia → Livorno → Tenerife → Las Palmas → Barcelona -->
+      <path class="route-path"
+        d="M 308,118 L 243,210 L 222,278
+           Q 355,255 498,207
+           Q 480,178 465,152
+           Q 352,242 248,348
+           Q 188,415 115,490
+           L 168,482
+           Q 242,438 308,118"
+        filter="url(#glow)" opacity="0.55"/>
+      <path
+        d="M 308,118 L 243,210 L 222,278
+           Q 355,255 498,207
+           Q 480,178 465,152
+           Q 352,242 248,348
+           Q 188,415 115,490
+           L 168,482
+           Q 242,438 308,118"
+        fill="none" stroke="rgba(201,168,76,0.1)" stroke-width="6" stroke-linecap="round"/>
+
+      <!-- 1. Barcelona -->
+      <g class="port-marker" onclick="openPort('barcelona')" data-port="barcelona">
+        <circle class="port-pulse" cx="308" cy="118" r="10"/>
+        <circle class="port-circle" cx="308" cy="118" r="9" filter="url(#glow)"/>
+        <text x="308" y="97" class="port-label" font-size="10" font-weight="700">⭐ BARCELONA</text>
+        <text x="308" y="108" class="port-label" style="font-size:7px;fill:rgba(244,237,224,0.5)">MAR 25 / APR 9</text>
+        <text x="308" y="137" class="camera-icon">📷</text>
+
+      </g>
+
+      <!-- 💍 PROPOSAL, 37.42°N, 1.08°W -->
+      <g class="proposal-marker" onclick="openPort('proposal')" data-port="proposal">
+        <!-- Halo glow around the exact coordinate spot -->
+        <circle cx="268" cy="175" r="34" fill="url(#proposal-halo)"/>
+        <!-- Pulse ring -->
+        <circle class="proposal-ring-pulse" cx="268" cy="175" r="12"/>
+        <!-- Dot on the actual coordinate -->
+        <circle class="proposal-circle" cx="268" cy="175" r="11" filter="url(#rose-glow)"/>
+        <!-- Ring emoji on the dot -->
+        <text x="268" y="180" text-anchor="middle" font-size="12" style="pointer-events:none;user-select:none">💍</text>
+
+        <!-- Leader line: from dot left-upward to callout box on the left -->
+        <!-- Dot at 268,175 → callout right edge at 238,112 -->
+        <line x1="260" y1="167" x2="238" y2="130"
+              stroke="rgba(232,160,160,0.6)" stroke-width="1.2" stroke-dasharray="3 2"
+              pointer-events="none"/>
+        <!-- Small arrowhead pointing toward the dot -->
+        <polygon points="264,174 257,164 271,164"
+                 fill="rgba(232,160,160,0.75)" pointer-events="none"/>
+
+        <!-- Callout box: left of Barcelona, upper-left open ocean area -->
+        <!-- Box: x=38 y=65, width=200, height=62 -->
+        <rect x="38" y="65" width="200" height="64"
+              rx="3" ry="3"
+              fill="rgba(8,13,28,0.88)"
+              stroke="rgba(232,160,160,0.5)" stroke-width="1"
+              pointer-events="none"/>
+        <!-- Gold corner ticks -->
+        <line x1="38" y1="70" x2="43" y2="65" stroke="rgba(232,160,160,0.7)" stroke-width="1.2" pointer-events="none"/>
+        <line x1="233" y1="70" x2="238" y2="65" stroke="rgba(232,160,160,0.7)" stroke-width="1.2" pointer-events="none"/>
+        <line x1="38" y1="124" x2="43" y2="129" stroke="rgba(232,160,160,0.7)" stroke-width="1.2" pointer-events="none"/>
+        <line x1="233" y1="124" x2="238" y2="129" stroke="rgba(232,160,160,0.7)" stroke-width="1.2" pointer-events="none"/>
+
+        <!-- Callout text centered in box -->
+        <text x="138" y="87" class="proposal-label" font-size="9">💍  SHE SAID YES</text>
+        <text x="138" y="102" class="proposal-sublabel" font-size="7.2">March 26, 2026 · 7:35 PM</text>
+        <text x="138" y="117" class="proposal-sublabel" font-size="6.2">37.42°N, 1.08°W · Cape Palos</text>
+      </g>
+
+      <!-- 2. Málaga -->
+      <g class="port-marker" onclick="openPort('malaga')" data-port="malaga">
+        <circle class="port-pulse" cx="243" cy="210" r="10"/>
+        <circle class="port-circle" cx="243" cy="210" r="8" filter="url(#glow)"/>
+        <text x="200" y="222" class="port-label">MÁLAGA</text>
+        <text x="200" y="232" class="port-label" style="font-size:6.5px;fill:rgba(244,237,224,0.5)">MAR 27</text>
+        <text x="243" y="229" class="camera-icon">📷</text>
+      </g>
+
+      <!-- 3. Tangier -->
+      <g class="port-marker" onclick="openPort('tangier')" data-port="tangier">
+        <circle class="port-pulse" cx="222" cy="278" r="10"/>
+        <circle class="port-circle" cx="222" cy="278" r="8" filter="url(#glow)"/>
+        <text x="222" y="257" class="port-label">TANGIER</text>
+        <text x="222" y="267" class="port-label" style="font-size:6.5px;fill:rgba(244,237,224,0.5)">MAR 28 · MOROCCO</text>
+        <text x="222" y="297" class="camera-icon">📷</text>
+      </g>
+
+      <!-- 4. Civitavecchia, Rome + Pisa -->
+      <g class="port-marker" onclick="openPort('civitavecchia')" data-port="civitavecchia">
+        <circle class="port-pulse" cx="498" cy="207" r="10"/>
+        <circle class="port-circle" cx="498" cy="207" r="8" filter="url(#glow)"/>
+        <text x="498" y="186" class="port-label">CIVITAVECCHIA</text>
+        <text x="498" y="197" class="port-label" style="font-size:6.5px;fill:rgba(244,237,224,0.5)">MAR 31 · ROME · PISA</text>
+        <text x="498" y="226" class="camera-icon">📷</text>
+      </g>
+
+      <!-- 5. Livorno -->
+      <g class="port-marker" onclick="openPort('livorno')" data-port="livorno">
+        <circle class="port-pulse" cx="465" cy="152" r="10"/>
+        <circle class="port-circle" cx="465" cy="152" r="8" filter="url(#glow)"/>
+        <text x="465" y="131" class="port-label">LIVORNO</text>
+        <text x="465" y="141" class="port-label" style="font-size:6.5px;fill:rgba(244,237,224,0.5)">APR 1 · TUSCANY</text>
+        <text x="465" y="170" class="camera-icon">📷</text>
+      </g>
+
+      <!-- 6. Tenerife -->
+      <g class="port-marker" onclick="openPort('tenerife')" data-port="tenerife">
+        <circle class="port-pulse" cx="115" cy="490" r="10"/>
+        <circle class="port-circle" cx="115" cy="490" r="8" filter="url(#glow)"/>
+        <text x="115" y="468" class="port-label">TENERIFE</text>
+        <text x="115" y="478" class="port-label" style="font-size:6.5px;fill:rgba(244,237,224,0.5)">APR 5 · CANARIES</text>
+        <text x="115" y="510" class="camera-icon">📷</text>
+      </g>
+
+      <!-- 7. Las Palmas de Gran Canaria -->
+      <g class="port-marker" onclick="openPort('grancanaria')" data-port="grancanaria">
+        <circle class="port-pulse" cx="168" cy="482" r="10"/>
+        <circle class="port-circle" cx="168" cy="482" r="8" filter="url(#glow)"/>
+        <text x="168" y="460" class="port-label">LAS PALMAS</text>
+        <text x="168" y="470" class="port-label" style="font-size:6.5px;fill:rgba(244,237,224,0.5)">APR 6 · GRAN CANARIA</text>
+        <text x="168" y="502" class="camera-icon">📷</text>
+      </g>
+
+      <!-- Ship icon, positioned in open water between Tangier and Civitavecchia -->
+      <g id="ship-icon" filter="url(#glow)">
+        <circle cx="358" cy="245" r="20" fill="rgba(201,168,76,0.12)"/>
+        <text x="358" y="253" text-anchor="middle" font-size="24" style="user-select:none">🚢</text>
+      </g>
+
+      <!-- Compass rose -->
+      <g transform="translate(910,548)" opacity="0.4">
+        <circle r="30" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+        <text text-anchor="middle" y="-35" font-family="Cinzel,serif" font-size="10" fill="#c9a84c">N</text>
+        <text text-anchor="middle" y="43" font-family="Cinzel,serif" font-size="10" fill="#c9a84c">S</text>
+        <text x="40" text-anchor="middle" y="4" font-family="Cinzel,serif" font-size="10" fill="#c9a84c">E</text>
+        <text x="-40" text-anchor="middle" y="4" font-family="Cinzel,serif" font-size="10" fill="#c9a84c">W</text>
+        <line x1="0" y1="-24" x2="0" y2="24" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
+        <line x1="-24" y1="0" x2="24" y2="0" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
+        <polygon points="0,-24 4,-7 -4,-7" fill="#c9a84c"/>
+        <polygon points="0,24 4,7 -4,7" fill="rgba(201,168,76,0.3)"/>
+      </g>
+      <text x="35" y="588" font-family="Space Mono,monospace" font-size="7.5" fill="rgba(201,168,76,0.35)" letter-spacing="1">MEDITERRANEAN SEA · 15 NIGHTS · 7 PORTS OF CALL · 1 VERY BIG QUESTION</text>
+    </svg>
+  </div>
+  <div class="ocean-anim">〜 〜 〜 〜 〜 〜 〜 〜 〜 〜 〜 〜</div>
+</div>
+
+<!-- GALLERY -->
+<div id="gallery-section" class="section">
+  <div class="gallery-header">
+    <h2>All <em style="font-style:italic;color:var(--gold-light)">Photos &amp; Videos</em></h2>
+    <p>Every memory from the voyage, sorted by where we were.</p>
+  </div>
+
+  <div class="gallery-tip">
+    <strong>The easy way to do this:</strong> Upload everything (your Pixel shots, iPhone photos, and the thumb drive from the ship) into one Google Photos shared album. Google Photos reads the GPS data from your Pixel and iPhone automatically and groups photos by place. You can link to that one album from here, or create a separate album per port. Either works great and your friends and family just click and see everything.
+  </div>
+
+  <div class="port-gallery-group">
+    <div class="port-gallery-title">
+      <span class="flag-em">💍</span>
+      <h3 style="color:var(--rose)">The Proposal</h3>
+      <span class="date-tag rose">MARCH 26 · 7:35 PM AT SEA</span>
+    </div>
+    <div class="add-photos-zone rose" style="border-color:rgba(232,160,160,0.4);background:rgba(232,160,160,0.04)">
+      <a href="https://photos.app.goo.gl/fSwj6mF7adAmUrR2A" target="_blank" class="btn-photos rose" style="display:inline-flex;text-decoration:none;margin-top:0.5rem;color:var(--navy);font-weight:600">
+        💍 &nbsp; VIEW PROPOSAL PHOTOS
+      </a>
+      <p style="margin-top:0.8rem;font-size:0.8rem;color:rgba(244,237,224,0.35);font-style:italic">37.42°N, 1.08°W · Cape Palos, Spain · March 26, 7:35 PM</p>
+    </div>
+  </div>
+
+  <div class="port-gallery-group">
+    <div class="port-gallery-title"><span class="flag-em">🇪🇸</span><h3>Barcelona, Spain</h3><span class="date-tag">MARCH 25</span></div>
+    <div class="add-photos-zone" style="border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04)">
+      <a href="https://photos.app.goo.gl/pabMRbdGtgfSJo4t7" target="_blank">
+        📸 &nbsp; VIEW BARCELONA PHOTOS &amp; VIDEOS
+      </a>
+      <p style="margin-top:0.8rem;font-size:0.8rem;color:rgba(244,237,224,0.35);font-style:italic">Opens full cruise album · sorted by date</p>
+    </div>
+  </div>
+
+  <div class="port-gallery-group">
+    <div class="port-gallery-title"><span class="flag-em">🇪🇸</span><h3>Málaga, Spain</h3><span class="date-tag">MARCH 27</span></div>
+    <div class="add-photos-zone" style="border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04)">
+      <a href="https://photos.app.goo.gl/rmGvpeLLxBdoLmWN9" target="_blank">
+        📸 &nbsp; VIEW MÁLAGA PHOTOS &amp; VIDEOS
+      </a>
+      <p style="margin-top:0.8rem;font-size:0.8rem;color:rgba(244,237,224,0.35);font-style:italic">Opens full cruise album · sorted by date</p>
+    </div>
+  </div>
+
+  <div class="port-gallery-group">
+    <div class="port-gallery-title"><span class="flag-em">🇲🇦</span><h3>Tangier, Morocco</h3><span class="date-tag">MARCH 28</span></div>
+    <div class="add-photos-zone" style="border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04)">
+      <a href="https://photos.app.goo.gl/1Nvf4vpR9JbupZRE8" target="_blank">
+        📸 &nbsp; VIEW TANGIER PHOTOS &amp; VIDEOS
+      </a>
+      <p style="margin-top:0.8rem;font-size:0.8rem;color:rgba(244,237,224,0.35);font-style:italic">Opens full cruise album · sorted by date</p>
+    </div>
+  </div>
+
+  <div class="port-gallery-group">
+    <div class="port-gallery-title"><span class="flag-em">🇮🇹</span><h3>Civitavecchia (Rome), Italy</h3><span class="date-tag">MARCH 31</span></div>
+    <div class="add-photos-zone" style="border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04)">
+      <a href="https://photos.app.goo.gl/aPTiNa2aHo3BqW8H7" target="_blank">
+        📸 &nbsp; VIEW ROME & PISA PHOTOS & VIDEOS & PISA PHOTOS &amp; VIDEOS
+      </a>
+      <p style="margin-top:0.8rem;font-size:0.8rem;color:rgba(244,237,224,0.35);font-style:italic">Opens full cruise album · sorted by date</p>
+    </div>
+  </div>
+
+  <div class="port-gallery-group">
+    <div class="port-gallery-title"><span class="flag-em">🇮🇹</span><h3>Livorno (Tuscany), Italy</h3><span class="date-tag">APRIL 1</span></div>
+    <div class="add-photos-zone" style="border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04)">
+      <a href="https://photos.app.goo.gl/zPDcrSHzMBsGGskN6" target="_blank">
+        📸 &nbsp; VIEW TUSCANY & FLORENCE PHOTOS & VIDEOS & FLORENCE PHOTOS &amp; VIDEOS
+      </a>
+      <p style="margin-top:0.8rem;font-size:0.8rem;color:rgba(244,237,224,0.35);font-style:italic">Opens full cruise album · sorted by date</p>
+    </div>
+  </div>
+
+  <div class="port-gallery-group">
+    <div class="port-gallery-title"><span class="flag-em">🇪🇸</span><h3>Santa Cruz de Tenerife</h3><span class="date-tag">APRIL 5</span></div>
+    <div class="add-photos-zone" style="border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04)">
+      <a href="https://photos.app.goo.gl/z1XvB9wYuSmNBptC6" target="_blank">
+        📸 &nbsp; VIEW TENERIFE PHOTOS &amp; VIDEOS
+      </a>
+      <p style="margin-top:0.8rem;font-size:0.8rem;color:rgba(244,237,224,0.35);font-style:italic">Opens full cruise album · sorted by date</p>
+    </div>
+  </div>
+
+  <div class="port-gallery-group">
+    <div class="port-gallery-title"><span class="flag-em">🇪🇸</span><h3>Las Palmas, Gran Canaria</h3><span class="date-tag">APRIL 6</span></div>
+    <div class="add-photos-zone" style="border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04)">
+      <a href="https://photos.app.goo.gl/Umn7NoySsr9TSuHL6" target="_blank">
+        📸 &nbsp; VIEW GRAN CANARIA PHOTOS &amp; VIDEOS
+      </a>
+      <p style="margin-top:0.8rem;font-size:0.8rem;color:rgba(244,237,224,0.35);font-style:italic">Opens full cruise album · sorted by date</p>
+    </div>
+  </div>
+
+  <div class="port-gallery-group">
+    <div class="port-gallery-title"><span class="flag-em">🚢</span><h3>Life Onboard the Glory</h3><span class="date-tag">THROUGHOUT</span></div>
+    <div class="add-photos-zone" style="border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04)">
+      <a href="https://photos.app.goo.gl/xzV1HeQGsWB4LNZJA" target="_blank" class="btn-photos" style="display:inline-flex;text-decoration:none;margin-top:0.5rem;color:var(--navy);font-weight:600">
+        📸 &nbsp; VIEW FULL CRUISE ALBUM
+      </a>
+      <p style="margin-top:0.8rem;font-size:0.95rem;color:rgba(244,237,224,0.55);font-style:italic;line-height:1.6">Our complete collection from the entire voyage: sea days, ship life, sunsets, entertainment, and the professional photos from the cruise photographer. Everything in one place.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about-section" class="section">
+  <h2>The <em style="font-style:italic;color:var(--gold-light)">Voyage</em></h2>
+  <div class="gold-rule"></div><br>
+  <p>We'll write this out properly once all the photos are sorted. Short version: 15 nights, 7 ports, four countries, one very big question asked somewhere in the Mediterranean at 7:35 in the evening, and more memories than we know what to do with.</p>
+
+  <div class="voyage-stats">
+    <div class="stat-box"><span class="stat-num">15</span><span class="stat-label">Nights at Sea</span></div>
+    <div class="stat-box"><span class="stat-num">7</span><span class="stat-label">Ports of Call</span></div>
+    <div class="stat-box"><span class="stat-num">4</span><span class="stat-label">Countries</span></div>
+    <div class="stat-box"><span class="stat-num">💍</span><span class="stat-label">Best Moment</span></div>
+  </div>
+
+  <p style="color:var(--gold-light);font-size:0.85rem;font-family:'Space Mono',monospace;letter-spacing:0.1em;">
+    🇪🇸 Spain &nbsp;·&nbsp; 🇲🇦 Morocco &nbsp;·&nbsp; 🇮🇹 Italy &nbsp;·&nbsp; 🇪🇸 Canary Islands
+  </p><br><br>
+
+  <div class="setup-box">
+    <h3>HOW TO ADD YOUR PHOTOS</h3>
+    <ol>
+      <li>Upload everything (Pixel, iPhone, thumb drive) into one <strong>Google Photos shared album</strong></li>
+      <li>Google Photos reads the GPS data from your shots and groups them by location automatically</li>
+      <li>Get the share link and paste it into the photo buttons in the port popups on the map</li>
+      <li>Or make one album per port and replace each <code>#</code> in the HTML with that album's URL</li>
+      <li>Host the finished page free on <strong>GitHub Pages</strong> and share one clean link with everyone</li>
+    </ol>
+  </div>
+</div>
+
+<div id="backdrop" onclick="closePort()"></div>
+<div id="port-card">
+  <div class="card-header">
+    <div class="card-port-num" id="card-num"></div>
+    <div class="card-title" id="card-title"></div>
+    <div class="card-date" id="card-date"></div>
+    <div class="card-flag" id="card-flag"></div>
+    <button class="close-btn" onclick="closePort()">✕</button>
+  </div>
+  <div class="card-body">
+    <div class="card-desc" id="card-desc"></div>
+    <div class="card-coords" id="card-coords"></div>
+    <div class="card-highlights" id="card-highlights"></div>
+    <div class="card-actions">
+      <a id="card-photos-btn" href="#" target="_blank" class="btn-photos" onclick="return handleClick(event)" style="clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)">📸 &nbsp; VIEW PHOTOS &amp; VIDEOS</a>
+      
+    </div>
+    <div class="card-tip" id="card-tip"></div>
+  </div>
+</div>
+
+<footer>
+  ⚓ &nbsp; CARNIVAL GLORY &nbsp;·&nbsp; MEDITERRANEAN SEA &nbsp;·&nbsp; MARCH – APRIL 2026 &nbsp; ⚓<br><br>
+  Made with love to share our adventure with friends &amp; family
+</footer>
+
+<script>
+const ports = {
+  proposal: {
+    num: 'MARCH 26 · 7:35 PM AT SEA',
+    title: 'She <em style="color:var(--rose)">Said Yes</em>',
+    date: 'Somewhere in the Mediterranean, March 26, 2026',
+    flag: '💍',
+    desc: 'One day out of Barcelona, the ship making 13 knots southwest through the Mediterranean. 7:35 in the evening on March 26. Inside the ship, warm and lit up, the water dark outside the windows. The AIS track puts the Glory at exactly 37.42°N, 1.08°W at that moment: 19 nautical miles past Cape Palos, off the southeastern coast of Spain. That\'s the spot. She said yes.',
+    coords: '📍 37.42°N, 1.08°W, 19 nautical miles past Cape Palos, southeastern Spain',
+    highlights: ['SHE SAID YES','MARCH 26 2026','MEDITERRANEAN SEA','SUNSET AT SEA','CARNIVAL GLORY'],
+    rose: true, photosLink:'https://photos.app.goo.gl/fSwj6mF7adAmUrR2A', videosLink:'',
+    tip: 'Add your proposal photos and video here, this one deserves its own album.',
+  },
+  barcelona: {
+    num: 'PORT 01, EMBARKATION & RETURN',
+    title: '<em>Barcelona</em>, Spain',
+    date: 'March 25 (departure) · April 9 (return)',
+    flag: '🇪🇸',
+    desc: 'Barcelona was where we started and where we ended. The city pulls you in immediately: the Gothic Quarter, the Sagrada Família, La Rambla. Boarding day was exciting and a little surreal. Coming back after 15 nights at sea felt like a completely different trip.',
+    highlights: ['SAGRADA FAMÍLIA','LA RAMBLA','GOTHIC QUARTER','BARCELONETA BEACH','PARK GÜELL'],
+    photosLink:'https://photos.app.goo.gl/pabMRbdGtgfSJo4t7', videosLink:'',
+  },
+  malaga: {
+    num: 'PORT 02 OF CALL',
+    title: '<em>Málaga</em>, Spain',
+    date: 'March 27, 2026',
+    flag: '🇪🇸',
+    desc: 'Málaga was our first port and a great way to ease into the trip. Picasso was born here, and the city has a relaxed energy that feels different from what you expect. The Alcazaba fortress up on the hill is worth the climb. Some of us made it out to Granada and the Alhambra, if you ever get the chance, do it.',
+    highlights: ['ALCAZABA FORTRESS','PICASSO MUSEUM','ALHAMBRA PALACE','GRANADA','CENTRAL MARKET'],
+    photosLink:'https://photos.app.goo.gl/rmGvpeLLxBdoLmWN9', videosLink:'',
+  },
+  tangier: {
+    num: 'PORT 03 OF CALL, MOROCCO',
+    title: '<em>Tangier</em>, Morocco',
+    date: 'March 28, 2026',
+    flag: '🇲🇦',
+    desc: 'Stepping off the ship in Tangier was a completely different world. The medina hits you all at once: the noise, the color, the spices, vendors everywhere. We had mint tea in a tiny café somewhere in the middle of it all. Standing up on the hills with Europe visible across the Strait of Gibraltar is one of those moments that sticks with you.',
+    highlights: ['THE MEDINA','GRAND SOCCO','CASBAH','CAPE SPARTEL','HERCULES CAVES'],
+    photosLink:'https://photos.app.goo.gl/1Nvf4vpR9JbupZRE8', videosLink:'',
+  },
+  civitavecchia: {
+    num: 'PORT 04 OF CALL, ITALY',
+    title: '<em>Civitavecchia</em>, Rome',
+    date: 'March 31, 2026',
+    flag: '🇮🇹',
+    desc: 'Civitavecchia is just the port. Rome is the destination. We spent the day in the city and took in as much as we could: the Colosseum, the Roman Forum, the Trevi Fountain. Almost too much history for one day. Some of us also made it to Pisa too. The tower leans more than you expect when you are actually standing next to it.',
+    highlights: ['THE COLOSSEUM','ROMAN FORUM','VATICAN CITY','TREVI FOUNTAIN','PISA & THE TOWER'],
+    photosLink:'https://photos.app.goo.gl/aPTiNa2aHo3BqW8H7', videosLink:'',
+  },
+  livorno: {
+    num: 'PORT 05 OF CALL, ITALY',
+    title: '<em>Livorno</em>, Tuscany',
+    date: 'April 1, 2026',
+    flag: '🇮🇹',
+    desc: 'Livorno was an adventure from the moment we stepped off the ship. The shuttle to the train station was completely disorganized so we did what any reasonable person would do, laced up the Lamberfeeties and walked the two miles ourselves. Once we got on the train to Rome we had no idea what was waiting for us. It was the day after Easter Sunday, and Rome was absolutely packed. We had paid for the big red hop-on hop-off bus but the lines were endless and nobody was getting off, so actually seeing anything became a real challenge. Still, we got to see the Colosseum up close. Standing in front of something that old and that massive stops you in your tracks no matter how many people are around you. The Roman Forum, the Trevi Fountain, the Vatican. We moved through as much as we could. Wish we had known just how many millions of people were going to be out that day. Pisa was a completely different pace. Still busy but nothing like Rome. The Leaning Tower is genuinely impressive in person. It leans far more than any photo suggests. We wandered away from the tourist areas into the actual city, found a quieter street with a little wine shop, and picked up a bottle to bring home. That ended up being one of the best parts of the whole day.',
+    highlights: ['PISA & THE TOWER','FLORENCE','UFFIZI GALLERY','TUSCAN HILLS','LUCCA'],
+    photosLink:'https://photos.app.goo.gl/zPDcrSHzMBsGGskN6', videosLink:'',
+  },
+  tenerife: {
+    num: 'PORT 06 OF CALL, CANARY ISLANDS',
+    title: '<em>Santa Cruz de Tenerife</em>',
+    date: 'April 5, 2026',
+    flag: '🇪🇸',
+    desc: 'Tenerife caught us off guard. Mount Teide sits in the center of the island, a massive active volcano surrounded by burnt-orange rock and plants that look like they belong somewhere else entirely. Then you drive down to the coast and there are black sand beaches. A lot going on for one island, all of it worth seeing.',
+    highlights: ['MOUNT TEIDE','TEIDE NATIONAL PARK','BLACK SAND BEACHES','LORO PARQUE','ANAGA MOUNTAINS'],
+    photosLink:'https://photos.app.goo.gl/z1XvB9wYuSmNBptC6', videosLink:'',
+  },
+  grancanaria: {
+    num: 'PORT 07 OF CALL, CANARY ISLANDS',
+    title: '<em>Las Palmas</em>, Gran Canaria',
+    date: 'April 6, 2026',
+    flag: '🇪🇸',
+    desc: 'Gran Canaria was our last port before heading back and a great note to end on. The Maspalomas dunes in the south are something you have to see: massive sand dunes at the edge of the Atlantic that feel more like the Sahara than the Canary Islands. Las Palmas itself has a beautiful old colonial quarter. Perfect weather the whole day.',
+    highlights: ['MASPALOMAS DUNES','VEGUETA OLD TOWN','LAS CANTERAS BEACH','ROQUE NUBLO','BOTANICAL GARDEN'],
+    photosLink:'https://photos.app.goo.gl/Umn7NoySsr9TSuHL6', videosLink:'',
+  },
+};
+
+function setZoom(level) {
+  const map = document.getElementById('cruise-map');
+  map.style.transform = `scale(${level})`;
+  map.style.marginBottom = level > 1 ? `${(level - 1) * map.offsetHeight * 0.5}px` : '0';
+  document.querySelectorAll('.zoom-btn').forEach(b => b.classList.remove('active-zoom'));
+  event.target.classList.add('active-zoom');
+}
+
+function enterSite() { document.getElementById('intro').classList.add('gone'); }
+
+function showSection(name, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(name + '-section').classList.add('active');
+  if (btn) btn.classList.add('active');
+  closePort();
+}
+
+function openPort(id) {
+  const p = ports[id];
+  if (!p) return;
+  const card = document.getElementById('port-card');
+  card.classList.toggle('proposal-card', !!p.rose);
+  document.getElementById('card-num').textContent = p.num;
+  document.getElementById('card-num').className = 'card-port-num' + (p.rose ? ' rose' : '');
+  document.getElementById('card-title').innerHTML = p.title;
+  document.getElementById('card-date').textContent = p.date;
+  document.getElementById('card-flag').textContent = p.flag;
+  document.getElementById('card-desc').textContent = p.desc;
+  const ce = document.getElementById('card-coords');
+  ce.textContent = p.coords || ''; ce.style.display = p.coords ? 'block' : 'none';
+  const hl = document.getElementById('card-highlights');
+  hl.innerHTML = p.highlights.map(h => `<span class="highlight-tag${p.rose ? ' rose' : ''}">${h}</span>`).join('');
+  const pb = document.getElementById('card-photos-btn');
+  pb.href = p.photosLink || '#';
+  pb.className = 'btn-photos' + (p.rose ? ' rose' : '');
+  document.getElementById('card-tip').textContent = '';
+  document.querySelectorAll('.port-marker,.proposal-marker').forEach(m => m.classList.remove('active'));
+  document.querySelector('[data-port="' + id + '"]')?.classList.add('active');
+  document.getElementById('backdrop').classList.add('open');
+  card.classList.add('open');
+}
+
+function closePort() {
+  document.getElementById('backdrop').classList.remove('open');
+  document.getElementById('port-card').classList.remove('open');
+  document.querySelectorAll('.port-marker,.proposal-marker').forEach(m => m.classList.remove('active'));
+}
+
+function handleClick(e) {
+  const link = e.currentTarget.href;
+  if (!link || link.endsWith('#')) {
+    e.preventDefault();
+    return false;
+  }
+  return true;
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePort(); });
+setTimeout(() => { if (!document.getElementById('intro').classList.contains('gone')) enterSite(); }, 8000);
+</script>
+</body>
+</html>
