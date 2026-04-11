@@ -7,16 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Cinzel:wght@400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    ,navy: #0a0f1e;
-    ,deep: #060b17;
-    ,gold: #c9a84c;
-    ,gold-light: #e8c97a;
-    ,cream: #f4ede0;
-    ,rose: #e8a0a0;
+    --navy: #0a0f1e;
+    --deep: #060b17;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f4ede0;
+    --rose: #e8a0a0;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior:smooth; }
-  body { background:var(,deep); color:var(,cream); font-family:'Cormorant Garamond',serif; overflow-x:hidden; cursor:crosshair; }
+  body { background:var(--deep); color:var(--cream); font-family:'Cormorant Garamond',serif; overflow-x:hidden; cursor:crosshair; }
 
   .stars {
     position:fixed; inset:0; pointer-events:none; z-index:0;
@@ -31,32 +31,32 @@
   }
 
   /* INTRO */
-  #intro { position:fixed; inset:0; z-index:1000; background:var(,deep); display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 1.2s ease,visibility 1.2s ease; }
+  #intro { position:fixed; inset:0; z-index:1000; background:var(--deep); display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 1.2s ease,visibility 1.2s ease; }
   #intro.gone { opacity:0; visibility:hidden; pointer-events:none; }
   .intro-ship { font-size:5rem; margin-bottom:1.5rem; animation:bob 3s ease-in-out infinite; filter:drop-shadow(0 0 30px rgba(201,168,76,0.5)); }
   @keyframes bob { 0%,100%{transform:translateY(0) rotate(-3deg)} 50%{transform:translateY(-12px) rotate(3deg)} }
-  .intro-title { font-family:'Cinzel',serif; font-size:clamp(1.8rem,5vw,3.5rem); color:var(,gold); letter-spacing:0.2em; text-align:center; margin-bottom:0.5rem; animation:fadeUp 1s ease 0.3s both; }
+  .intro-title { font-family:'Cinzel',serif; font-size:clamp(1.8rem,5vw,3.5rem); color:var(--gold); letter-spacing:0.2em; text-align:center; margin-bottom:0.5rem; animation:fadeUp 1s ease 0.3s both; }
   .intro-sub { font-size:1.2rem; font-style:italic; color:rgba(244,237,224,0.6); letter-spacing:0.1em; animation:fadeUp 1s ease 0.6s both; text-align:center; }
   .intro-ring { font-size:2rem; margin-top:0.8rem; animation:fadeUp 1s ease 0.8s both,ring-pulse 2s ease-in-out 1.5s infinite; }
   @keyframes ring-pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
-  .intro-line { width:200px; height:1px; background:linear-gradient(90deg,transparent,var(,gold),transparent); margin:2rem auto; animation:fadeUp 1s ease 0.9s both; }
-  .enter-btn { font-family:'Cinzel',serif; font-size:0.9rem; letter-spacing:0.3em; color:var(,navy); background:var(,gold); border:none; padding:1rem 2.5rem; cursor:pointer; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:all 0.3s ease; animation:fadeUp 1s ease 1.2s both; }
-  .enter-btn:hover { background:var(,gold-light); transform:scale(1.05); }
+  .intro-line { width:200px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:2rem auto; animation:fadeUp 1s ease 0.9s both; }
+  .enter-btn { font-family:'Cinzel',serif; font-size:0.9rem; letter-spacing:0.3em; color:var(--navy); background:var(--gold); border:none; padding:1rem 2.5rem; cursor:pointer; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:all 0.3s ease; animation:fadeUp 1s ease 1.2s both; }
+  .enter-btn:hover { background:var(--gold-light); transform:scale(1.05); }
   @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
   /* HEADER */
   header { position:relative; z-index:10; padding:4rem 2rem 2rem; text-align:center; border-bottom:1px solid rgba(201,168,76,0.2); }
-  .voyage-label { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.4em; color:var(,gold); margin-bottom:1rem; }
+  .voyage-label { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.4em; color:var(--gold); margin-bottom:1rem; }
   h1 { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,6vw,4.5rem); font-weight:400; line-height:1.1; margin-bottom:0.5rem; }
-  h1 em { font-style:italic; color:var(,gold-light); }
+  h1 em { font-style:italic; color:var(--gold-light); }
   .header-meta { font-size:1rem; font-style:italic; color:rgba(244,237,224,0.5); letter-spacing:0.15em; margin-top:0.5rem; }
-  .gold-rule { width:100%; max-width:500px; height:1px; margin:1.5rem auto 0; background:linear-gradient(90deg,transparent,var(,gold) 30%,var(,gold-light) 50%,var(,gold) 70%,transparent); }
+  .gold-rule { width:100%; max-width:500px; height:1px; margin:1.5rem auto 0; background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold-light) 50%,var(--gold) 70%,transparent); }
 
   /* NAV */
   .nav-tabs { position:sticky; top:0; z-index:100; display:flex; justify-content:center; background:rgba(6,11,23,0.95); backdrop-filter:blur(10px); border-bottom:1px solid rgba(201,168,76,0.2); padding:0 1rem; }
   .nav-tab { font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.25em; color:rgba(244,237,224,0.5); background:none; border:none; padding:1.2rem 2rem; cursor:pointer; border-bottom:2px solid transparent; transition:all 0.3s ease; white-space:nowrap; }
-  .nav-tab:hover { color:var(,gold-light); }
-  .nav-tab.active { color:var(,gold); border-bottom-color:var(,gold); }
+  .nav-tab:hover { color:var(--gold-light); }
+  .nav-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
 
   .section { display:none; }
   .section.active { display:block; }
@@ -65,40 +65,40 @@
   #map-section { position:relative; min-height:100vh; }
   .map-intro { text-align:center; padding:3rem 2rem 2rem; }
   .map-intro p { font-size:1.1rem; font-style:italic; color:rgba(244,237,224,0.6); max-width:500px; margin:0 auto; }
-  .pulse-hint { display:inline-flex; align-items:center; gap:0.5rem; font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; color:var(,gold); margin-top:1rem; animation:pulse-fade 2s ease-in-out infinite; }
+  .pulse-hint { display:inline-flex; align-items:center; gap:0.5rem; font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); margin-top:1rem; animation:pulse-fade 2s ease-in-out infinite; }
   @keyframes pulse-fade { 0%,100%{opacity:0.4} 50%{opacity:1} }
   .map-container { position:relative; max-width:1400px; margin:0 auto; padding:0.5rem 1.5rem 3rem; }
   #cruise-map { width:100%; height:auto; display:block; filter:drop-shadow(0 20px 60px rgba(0,0,0,0.6)); transition:transform 0.3s ease; transform-origin:center top; }
   .zoom-controls { display:flex; justify-content:center; gap:0.8rem; margin:0 0 1rem; }
-  .zoom-btn { font-family:'Cinzel',serif; font-size:0.8rem; letter-spacing:0.2em; color:var(,gold); background:rgba(201,168,76,0.07); border:1px solid rgba(201,168,76,0.3); padding:0.6rem 1.6rem; cursor:pointer; transition:all 0.2s ease; }
-  .zoom-btn:hover { background:rgba(201,168,76,0.18); border-color:var(,gold); }
-  .zoom-btn.active-zoom { background:rgba(201,168,76,0.2); border-color:var(,gold); color:var(,gold-light); }
+  .zoom-btn { font-family:'Cinzel',serif; font-size:0.8rem; letter-spacing:0.2em; color:var(--gold); background:rgba(201,168,76,0.07); border:1px solid rgba(201,168,76,0.3); padding:0.6rem 1.6rem; cursor:pointer; transition:all 0.2s ease; }
+  .zoom-btn:hover { background:rgba(201,168,76,0.18); border-color:var(--gold); }
+  .zoom-btn.active-zoom { background:rgba(201,168,76,0.2); border-color:var(--gold); color:var(--gold-light); }
 
-  .route-path { fill:none; stroke:var(,gold); stroke-width:1.5; stroke-dasharray:6 5; stroke-linecap:round; opacity:0.7; animation:dash-flow 30s linear infinite; }
+  .route-path { fill:none; stroke:var(--gold); stroke-width:1.5; stroke-dasharray:6 5; stroke-linecap:round; opacity:0.7; animation:dash-flow 30s linear infinite; }
   @keyframes dash-flow { to{stroke-dashoffset:-220} }
 
   #ship-icon { animation:ship-float 4s ease-in-out infinite; }
   @keyframes ship-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
 
   .port-marker { cursor:pointer; }
-  .port-pulse { fill:none; stroke:var(,gold); stroke-width:1; opacity:0; }
+  .port-pulse { fill:none; stroke:var(--gold); stroke-width:1; opacity:0; }
   .port-marker:hover .port-pulse,.port-marker.active .port-pulse { animation:pulse-ring 1.5s ease-out infinite; }
   @keyframes pulse-ring { 0%{opacity:0.8;r:10} 100%{opacity:0;r:26} }
-  .port-circle { fill:var(,gold); stroke:var(,cream); stroke-width:1.5; transition:all 0.3s ease; }
-  .port-marker.active .port-circle { fill:var(,gold-light); }
-  .port-label { font-family:'Cinzel',serif; font-size:9.5px; fill:var(,cream); text-anchor:middle; pointer-events:none; }
-  .camera-icon { font-size:11px; fill:var(,gold); text-anchor:middle; pointer-events:none; animation:cam-pulse 2s ease-in-out infinite; }
+  .port-circle { fill:var(--gold); stroke:var(--cream); stroke-width:1.5; transition:all 0.3s ease; }
+  .port-marker.active .port-circle { fill:var(--gold-light); }
+  .port-label { font-family:'Cinzel',serif; font-size:9.5px; fill:var(--cream); text-anchor:middle; pointer-events:none; }
+  .camera-icon { font-size:11px; fill:var(--gold); text-anchor:middle; pointer-events:none; animation:cam-pulse 2s ease-in-out infinite; }
   @keyframes cam-pulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
-  .click-badge { font-family:'Space Mono',monospace; font-size:6.5px; fill:var(,gold); text-anchor:middle; pointer-events:none; }
+  .click-badge { font-family:'Space Mono',monospace; font-size:6.5px; fill:var(--gold); text-anchor:middle; pointer-events:none; }
   .land { fill:#1a2a3a; stroke:#2a3f52; stroke-width:0.5; }
 
   /* PROPOSAL */
   .proposal-marker { cursor:pointer; }
-  .proposal-ring-pulse { fill:none; stroke:var(,rose); stroke-width:1; opacity:0; }
+  .proposal-ring-pulse { fill:none; stroke:var(--rose); stroke-width:1; opacity:0; }
   .proposal-marker:hover .proposal-ring-pulse,.proposal-marker.active .proposal-ring-pulse { animation:prop-pulse 1.8s ease-out infinite; }
   @keyframes prop-pulse { 0%{opacity:1;r:10} 100%{opacity:0;r:28} }
-  .proposal-circle { fill:var(,rose); stroke:white; stroke-width:1.5; filter:drop-shadow(0 0 8px rgba(232,160,160,0.9)); }
-  .proposal-label { font-family:'Cinzel',serif; font-size:8.5px; fill:var(,rose); text-anchor:middle; pointer-events:none; font-weight:600; }
+  .proposal-circle { fill:var(--rose); stroke:white; stroke-width:1.5; filter:drop-shadow(0 0 8px rgba(232,160,160,0.9)); }
+  .proposal-label { font-family:'Cinzel',serif; font-size:8.5px; fill:var(--rose); text-anchor:middle; pointer-events:none; font-weight:600; }
   .proposal-sublabel { font-family:'Cormorant Garamond',serif; font-size:7px; fill:rgba(232,160,160,0.75); text-anchor:middle; pointer-events:none; font-style:italic; }
 
   /* CARD */
@@ -107,29 +107,29 @@
   #port-card.proposal-card { border-color:rgba(232,160,160,0.5); }
   .card-header { padding:2rem 2rem 1.2rem; border-bottom:1px solid rgba(201,168,76,0.15); position:relative; }
   #port-card.proposal-card .card-header { border-bottom-color:rgba(232,160,160,0.2); }
-  .card-port-num { font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.3em; color:var(,gold); margin-bottom:0.4rem; }
-  .card-port-num.rose { color:var(,rose); }
+  .card-port-num { font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.3em; color:var(--gold); margin-bottom:0.4rem; }
+  .card-port-num.rose { color:var(--rose); }
   .card-title { font-family:'Playfair Display',serif; font-size:2rem; font-weight:400; }
-  .card-title em { font-style:italic; color:var(,gold-light); }
+  .card-title em { font-style:italic; color:var(--gold-light); }
   .card-date { font-style:italic; color:rgba(244,237,224,0.5); font-size:0.95rem; margin-top:0.3rem; }
   .card-flag { font-size:1.8rem; position:absolute; right:2rem; top:2rem; }
   .close-btn { position:absolute; right:1rem; top:1rem; background:none; border:none; color:rgba(244,237,224,0.4); font-size:1.2rem; cursor:pointer; width:30px; height:30px; display:flex; align-items:center; justify-content:center; transition:color 0.2s; font-family:monospace; }
-  .close-btn:hover { color:var(,cream); }
+  .close-btn:hover { color:var(--cream); }
   .card-body { padding:1.5rem 2rem; }
   .card-desc { font-size:1rem; line-height:1.75; color:rgba(244,237,224,0.8); margin-bottom:1rem; }
   .card-coords { font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.12em; color:rgba(232,160,160,0.6); margin-bottom:1.2rem; }
   .card-highlights { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.8rem; }
-  .highlight-tag { font-family:'Space Mono',monospace; font-size:0.55rem; letter-spacing:0.15em; color:var(,navy); background:var(,gold); padding:0.3rem 0.8rem; clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%); }
-  .highlight-tag.rose { background:var(,rose); }
+  .highlight-tag { font-family:'Space Mono',monospace; font-size:0.55rem; letter-spacing:0.15em; color:var(--navy); background:var(--gold); padding:0.3rem 0.8rem; clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%); }
+  .highlight-tag.rose { background:var(--rose); }
   .card-actions { display:flex; gap:1rem; flex-wrap:wrap; }
   .btn-photos,.btn-videos { flex:1; min-width:120px; font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.2em; padding:0.9rem 1rem; border:none; cursor:pointer; transition:all 0.3s ease; text-decoration:none; text-align:center; display:flex; align-items:center; justify-content:center; gap:0.5rem; }
-  .btn-photos { background:var(,gold); color:var(,navy); clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%); }
-  .btn-photos:hover { background:var(,gold-light); transform:translateY(-2px); }
-  .btn-photos.rose { background:var(,rose); }
+  .btn-photos { background:var(--gold); color:var(--navy); clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%); }
+  .btn-photos:hover { background:var(--gold-light); transform:translateY(-2px); }
+  .btn-photos.rose { background:var(--rose); }
   .btn-photos.rose:hover { background:#f0b8b8; }
-  .btn-videos { background:transparent; color:var(,gold); border:1px solid rgba(201,168,76,0.5); }
-  .btn-videos:hover { border-color:var(,gold); background:rgba(201,168,76,0.08); }
-  .btn-videos.rose { color:var(,rose); border-color:rgba(232,160,160,0.4); }
+  .btn-videos { background:transparent; color:var(--gold); border:1px solid rgba(201,168,76,0.5); }
+  .btn-videos:hover { border-color:var(--gold); background:rgba(201,168,76,0.08); }
+  .btn-videos.rose { color:var(--rose); border-color:rgba(232,160,160,0.4); }
   .card-tip { margin-top:1.2rem; font-size:0.8rem; color:rgba(244,237,224,0.3); font-style:italic; text-align:center; }
 
   #backdrop { position:fixed; inset:0; z-index:499; background:rgba(0,0,0,0.7); opacity:0; pointer-events:none; transition:opacity 0.4s ease; backdrop-filter:blur(3px); }
@@ -140,33 +140,33 @@
   .gallery-header { text-align:center; margin-bottom:2rem; }
   .gallery-header h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,3rem); font-weight:400; margin-bottom:0.5rem; }
   .gallery-header p { font-style:italic; color:rgba(244,237,224,0.5); font-size:1rem; }
-  .gallery-tip { background:rgba(201,168,76,0.05); border-left:3px solid var(,gold); padding:1.2rem 1.5rem; margin-bottom:3rem; font-size:0.95rem; line-height:1.75; color:rgba(244,237,224,0.7); }
-  .gallery-tip strong { color:var(,gold-light); }
+  .gallery-tip { background:rgba(201,168,76,0.05); border-left:3px solid var(--gold); padding:1.2rem 1.5rem; margin-bottom:3rem; font-size:0.95rem; line-height:1.75; color:rgba(244,237,224,0.7); }
+  .gallery-tip strong { color:var(--gold-light); }
   .port-gallery-group { margin-bottom:3.5rem; }
   .port-gallery-title { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; padding-bottom:0.8rem; border-bottom:1px solid rgba(201,168,76,0.2); }
   .port-gallery-title .flag-em { font-size:1.8rem; }
   .port-gallery-title h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:400; }
-  .port-gallery-title .date-tag { font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:var(,gold); margin-left:auto; }
-  .port-gallery-title .date-tag.rose { color:var(,rose); }
+  .port-gallery-title .date-tag { font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:var(--gold); margin-left:auto; }
+  .port-gallery-title .date-tag.rose { color:var(--rose); }
   .add-photos-zone { border:1px dashed rgba(201,168,76,0.3); border-radius:4px; padding:2rem; text-align:center; color:rgba(244,237,224,0.4); font-style:italic; font-size:0.95rem; background:rgba(201,168,76,0.02); }
   .add-photos-zone::before { content:'📸'; display:block; font-size:1.8rem; margin-bottom:0.6rem; opacity:0.5; }
   .add-photos-zone.rose { border-color:rgba(232,160,160,0.3); background:rgba(232,160,160,0.02); }
   .add-photos-zone.rose::before { content:'💍'; }
-  .add-photos-zone a { color:var(,gold); text-decoration:none; border-bottom:1px solid rgba(201,168,76,0.3); }
+  .add-photos-zone a { color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(201,168,76,0.3); }
 
   /* ABOUT */
   #about-section { max-width:750px; margin:0 auto; padding:4rem 2rem 6rem; text-align:center; }
   #about-section h2 { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:400; margin-bottom:2rem; }
   .voyage-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1.5rem; margin:2.5rem 0; }
   .stat-box { border:1px solid rgba(201,168,76,0.2); padding:1.5rem 1rem; background:rgba(201,168,76,0.03); position:relative; }
-  .stat-box::before { content:''; position:absolute; top:-1px; left:15%; right:15%; height:2px; background:linear-gradient(90deg,transparent,var(,gold),transparent); }
-  .stat-num { font-family:'Cinzel',serif; font-size:2rem; color:var(,gold); display:block; }
+  .stat-box::before { content:''; position:absolute; top:-1px; left:15%; right:15%; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+  .stat-num { font-family:'Cinzel',serif; font-size:2rem; color:var(--gold); display:block; }
   .stat-label { font-family:'Space Mono',monospace; font-size:0.55rem; letter-spacing:0.2em; color:rgba(244,237,224,0.4); display:block; margin-top:0.3rem; }
   #about-section p { font-size:1.05rem; line-height:1.8; color:rgba(244,237,224,0.65); margin-bottom:1rem; }
   .setup-box { background:rgba(201,168,76,0.05); border:1px solid rgba(201,168,76,0.2); padding:2rem; margin:2rem 0; text-align:left; }
-  .setup-box h3 { font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:0.2em; color:var(,gold); margin-bottom:1.2rem; }
+  .setup-box h3 { font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:1.2rem; }
   .setup-box ol { padding-left:1.2rem; font-size:0.92rem; line-height:2.2; color:rgba(244,237,224,0.7); }
-  .setup-box code { font-family:'Space Mono',monospace; font-size:0.72rem; background:rgba(201,168,76,0.1); padding:0.1rem 0.4rem; border-radius:2px; color:var(,gold-light); }
+  .setup-box code { font-family:'Space Mono',monospace; font-size:0.72rem; background:rgba(201,168,76,0.1); padding:0.1rem 0.4rem; border-radius:2px; color:var(--gold-light); }
 
   footer { text-align:center; padding:2rem; border-top:1px solid rgba(201,168,76,0.1); font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(244,237,224,0.2); }
   .ocean-anim { text-align:center; font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.3em; color:rgba(100,180,220,0.3); padding:1rem; animation:wave-color 4s ease-in-out infinite; }
@@ -413,7 +413,7 @@
 <!, GALLERY ,>
 <div id="gallery-section" class="section">
   <div class="gallery-header">
-    <h2>All <em style="font-style:italic;color:var(,gold-light)">Photos &amp; Videos</em></h2>
+    <h2>All <em style="font-style:italic;color:var(--gold-light)">Photos &amp; Videos</em></h2>
     <p>Every memory from the voyage, sorted by where we were.</p>
   </div>
 
@@ -422,16 +422,16 @@
   <div class="port-gallery-group">
     <div class="port-gallery-title">
       <span class="flag-em">💍</span>
-      <h3 style="color:var(,rose)">The Proposal</h3>
+      <h3 style="color:var(--rose)">The Proposal</h3>
       <span class="date-tag rose">MARCH 26 · 7:35 PM AT SEA</span>
     </div>
     <div class="add-photos-zone rose" style="border-color:rgba(232,160,160,0.4);background:rgba(232,160,160,0.04)">
-      <a href="https://photos.app.goo.gl/fSwj6mF7adAmUrR2A" target="_blank" class="btn-photos rose" style="display:inline-flex;text-decoration:none;margin-top:0.5rem;color:var(,navy);font-weight:600">
+      <a href="https://photos.app.goo.gl/fSwj6mF7adAmUrR2A" target="_blank" class="btn-photos rose" style="display:inline-flex;text-decoration:none;margin-top:0.5rem;color:var(--navy);font-weight:600">
         💍 &nbsp; VIEW PROPOSAL PHOTOS
       </a>
       <div style="margin-top:1rem;padding:0.9rem 1.2rem;border:1px solid rgba(232,160,160,0.4);background:rgba(232,160,160,0.07);border-radius:3px;">
-        <div style="font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;color:var(,rose);margin-bottom:0.5rem;">EXACT LOCATION OF THE PROPOSAL</div>
-        <div style="font-family:'Cinzel',serif;font-size:1.05rem;color:var(,cream);letter-spacing:0.05em;margin-bottom:0.4rem;">37.42°N, 1.08°W &nbsp;·&nbsp; Cape Palos, Spain</div>
+        <div style="font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;color:var(--rose);margin-bottom:0.5rem;">EXACT LOCATION OF THE PROPOSAL</div>
+        <div style="font-family:'Cinzel',serif;font-size:1.05rem;color:var(--cream);letter-spacing:0.05em;margin-bottom:0.4rem;">37.42°N, 1.08°W &nbsp;·&nbsp; Cape Palos, Spain</div>
         <div style="font-size:0.88rem;color:rgba(244,237,224,0.55);font-style:italic;">March 26, 2026 at 7:35 PM &nbsp;·&nbsp; 19 nautical miles offshore &nbsp;·&nbsp; Coordinates confirmed from the ship's live AIS tracking data</div>
       </div>   </div>
   </div>
@@ -509,7 +509,7 @@
   <div class="port-gallery-group">
     <div class="port-gallery-title"><span class="flag-em">🚢</span><h3>Life Onboard the Glory</h3><span class="date-tag">THROUGHOUT</span></div>
     <div class="add-photos-zone" style="border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04)">
-      <a href="https://photos.app.goo.gl/xzV1HeQGsWB4LNZJA" target="_blank" class="btn-photos" style="display:inline-flex;text-decoration:none;margin-top:0.5rem;color:var(,navy);font-weight:600">
+      <a href="https://photos.app.goo.gl/xzV1HeQGsWB4LNZJA" target="_blank" class="btn-photos" style="display:inline-flex;text-decoration:none;margin-top:0.5rem;color:var(--navy);font-weight:600">
         📸 &nbsp; VIEW FULL CRUISE ALBUM
       </a>
       <p style="margin-top:0.8rem;font-size:0.95rem;color:rgba(244,237,224,0.55);font-style:italic;line-height:1.6">Our complete collection from the entire voyage: sea days, ship life, sunsets, entertainment, and the professional photos from the cruise photographer. Everything in one place.</p>
@@ -519,7 +519,7 @@
 
 <!, ABOUT ,>
 <div id="about-section" class="section">
-  <h2>The <em style="font-style:italic;color:var(,gold-light)">Voyage</em></h2>
+  <h2>The <em style="font-style:italic;color:var(--gold-light)">Voyage</em></h2>
   <div class="gold-rule"></div><br>
   <p>We'll write this out properly once all the photos are sorted. Short version: 15 nights, 7 ports, four countries, one very big question asked somewhere in the Mediterranean at 7:35 in the evening, and more memories than we know what to do with.</p>
 
@@ -530,7 +530,7 @@
     <div class="stat-box"><span class="stat-num">💍</span><span class="stat-label">Best Moment</span></div>
   </div>
 
-  <p style="color:var(,gold-light);font-size:0.85rem;font-family:'Space Mono',monospace;letter-spacing:0.1em;">
+  <p style="color:var(--gold-light);font-size:0.85rem;font-family:'Space Mono',monospace;letter-spacing:0.1em;">
     🇪🇸 Spain &nbsp;·&nbsp; 🇲🇦 Morocco &nbsp;·&nbsp; 🇮🇹 Italy &nbsp;·&nbsp; 🇪🇸 Canary Islands
   </p><br><br>
 
@@ -661,6 +661,14 @@ One day out of Barcelona, the ship making 13 knots southwest through the Mediter
 };
 
 
+function setZoom(level) {
+  const map = document.getElementById('cruise-map');
+  map.style.transform = `scale(${level})`;
+  map.style.marginBottom = level > 1 ? `${(level - 1) * map.offsetHeight * 0.5}px` : '0';
+  document.querySelectorAll('.zoom-btn').forEach(b => b.classList.remove('active-zoom'));
+  event.target.classList.add('active-zoom');
+}
+
 function enterSite() { document.getElementById('intro').classList.add('gone'); }
 
 function showSection(name, btn) {
@@ -718,8 +726,8 @@ setTimeout(() => { if (!document.getElementById('intro').classList.contains('gon
 </script>
 </body>
 </html>      <div style="margin-top:1.2rem;padding:1rem 1.5rem;border:1px solid rgba(232,160,160,0.35);background:rgba(232,160,160,0.06);text-align:left;">
-        <div style="font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;color:var(,rose);margin-bottom:0.5rem;">EXACT COORDINATES OF THE PROPOSAL</div>
-        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(,cream);margin-bottom:0.4rem;">37.42°N, 1.08°W</div>
+        <div style="font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;color:var(--rose);margin-bottom:0.5rem;">EXACT COORDINATES OF THE PROPOSAL</div>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--cream);margin-bottom:0.4rem;">37.42°N, 1.08°W</div>
         <div style="font-size:0.9rem;color:rgba(244,237,224,0.6);font-style:italic;line-height:1.6">19 nautical miles off Cape Palos, southeastern Spain. The Carnival Glory was making 13 knots southwest through the Mediterranean. It was March 26 at 7:35 in the evening. These are the precise coordinates pulled from the ship's AIS tracking data — this is exactly where it happened.</div>
       </div>
   </div>
@@ -729,11 +737,11 @@ setTimeout(() => { if (!document.getElementById('intro').classList.contains('gon
   <div class="port-gallery-group">
     <div class="port-gallery-title">
       <span class="flag-em">💍</span>
-      <h3 style="color:var(,rose)">The Proposal</h3>
+      <h3 style="color:var(--rose)">The Proposal</h3>
       <span class="date-tag rose">MARCH 26 · 7:35 PM AT SEA</span>
     </div>
     <div class="add-photos-zone rose" style="border-color:rgba(232,160,160,0.4);background:rgba(232,160,160,0.04)">
-      <a href="https://photos.app.goo.gl/fSwj6mF7adAmUrR2A" target="_blank" class="btn-photos rose" style="display:inline-flex;text-decoration:none;margin-top:0.5rem;color:var(,navy);font-weight:600">
+      <a href="https://photos.app.goo.gl/fSwj6mF7adAmUrR2A" target="_blank" class="btn-photos rose" style="display:inline-flex;text-decoration:none;margin-top:0.5rem;color:var(--navy);font-weight:600">
         💍 &nbsp; VIEW PROPOSAL PHOTOS
       </a>
       <p style="margin-top:0.8rem;font-size:0.8rem;color:rgba(244,237,224,0.35);font-style:italic">37.42°N, 1.08°W · Cape Palos, Spain · March 26, 7:35 PM</p>
@@ -813,7 +821,7 @@ setTimeout(() => { if (!document.getElementById('intro').classList.contains('gon
   <div class="port-gallery-group">
     <div class="port-gallery-title"><span class="flag-em">🚢</span><h3>Life Onboard the Glory</h3><span class="date-tag">THROUGHOUT</span></div>
     <div class="add-photos-zone" style="border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04)">
-      <a href="https://photos.app.goo.gl/xzV1HeQGsWB4LNZJA" target="_blank" class="btn-photos" style="display:inline-flex;text-decoration:none;margin-top:0.5rem;color:var(,navy);font-weight:600">
+      <a href="https://photos.app.goo.gl/xzV1HeQGsWB4LNZJA" target="_blank" class="btn-photos" style="display:inline-flex;text-decoration:none;margin-top:0.5rem;color:var(--navy);font-weight:600">
         📸 &nbsp; VIEW FULL CRUISE ALBUM
       </a>
       <p style="margin-top:0.8rem;font-size:0.95rem;color:rgba(244,237,224,0.55);font-style:italic;line-height:1.6">Our complete collection from the entire voyage: sea days, ship life, sunsets, entertainment, and the professional photos from the cruise photographer. Everything in one place.</p>
@@ -823,7 +831,7 @@ setTimeout(() => { if (!document.getElementById('intro').classList.contains('gon
 
 <!, ABOUT ,>
 <div id="about-section" class="section">
-  <h2>The <em style="font-style:italic;color:var(,gold-light)">Voyage</em></h2>
+  <h2>The <em style="font-style:italic;color:var(--gold-light)">Voyage</em></h2>
   <div class="gold-rule"></div><br>
   <p>We'll write this out properly once all the photos are sorted. Short version: 15 nights, 7 ports, four countries, one very big question asked somewhere in the Mediterranean at 7:35 in the evening, and more memories than we know what to do with.</p>
 
@@ -834,7 +842,7 @@ setTimeout(() => { if (!document.getElementById('intro').classList.contains('gon
     <div class="stat-box"><span class="stat-num">💍</span><span class="stat-label">Best Moment</span></div>
   </div>
 
-  <p style="color:var(,gold-light);font-size:0.85rem;font-family:'Space Mono',monospace;letter-spacing:0.1em;">
+  <p style="color:var(--gold-light);font-size:0.85rem;font-family:'Space Mono',monospace;letter-spacing:0.1em;">
     🇪🇸 Spain &nbsp;·&nbsp; 🇲🇦 Morocco &nbsp;·&nbsp; 🇮🇹 Italy &nbsp;·&nbsp; 🇪🇸 Canary Islands
   </p><br><br>
 
